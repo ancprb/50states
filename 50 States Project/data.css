@@ -1,0 +1,273 @@
+/* =============================================
+   THE STATES — Data Page Stylesheet
+   ============================================= */
+
+/* ── Two-pane layout ── */
+.data-page-layout {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  min-height: calc(100vh - 64px); /* full height minus bottom nav */
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* ── Shared pane styles ── */
+.rankings-pane,
+.compare-pane {
+  padding: 36px 28px;
+}
+
+.rankings-pane {
+  border-right: 1px solid var(--border);
+  background: var(--bg-alt);
+  position: sticky;
+  top: 0;
+  height: calc(100vh - 64px); /* minus bottom nav */
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+.rankings-pane::-webkit-scrollbar { width: 5px; }
+.rankings-pane::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
+
+.compare-pane {
+  background: var(--bg);
+}
+
+.pane-header {
+  margin-bottom: 20px;
+}
+.pane-title {
+  font-size: 1.3rem;
+  font-weight: 800;
+  letter-spacing: -.02em;
+  margin-bottom: 3px;
+}
+.pane-sub {
+  font-size: .8rem;
+  color: var(--text-light);
+}
+
+/* ── Rankings ── */
+.rankings-controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+.rankings-controls .select-wrapper { flex: 1; min-width: 0; }
+.rankings-controls select { width: 100%; min-width: 0; }
+
+#rankings-table { display: flex; flex-direction: column; gap: 4px; }
+
+.ranking-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition: background var(--transition), border-color var(--transition);
+  position: relative;
+}
+.ranking-row:hover {
+  background: var(--accent-light);
+  border-color: var(--accent-mid);
+}
+.ranking-row.selected-a {
+  background: #eff6ff;
+  border-color: #3b82f6;
+}
+.ranking-row.selected-b {
+  background: #fffbeb;
+  border-color: #f59e0b;
+}
+.ranking-row.selected-a .rank-abbr { background: #3b82f6; color: #fff; }
+.ranking-row.selected-b .rank-abbr { background: #f59e0b; color: #fff; }
+
+.rank-num {
+  font-size: .75rem;
+  font-weight: 700;
+  color: var(--text-light);
+  width: 22px;
+  text-align: right;
+  flex-shrink: 0;
+}
+.rank-abbr {
+  font-size: .75rem;
+  font-weight: 800;
+  color: var(--accent);
+  background: var(--accent-light);
+  border-radius: 5px;
+  width: 32px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background var(--transition), color var(--transition);
+}
+.rank-name {
+  font-size: .82rem;
+  font-weight: 500;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.rank-bar-track {
+  width: 52px;
+  height: 6px;
+  background: var(--border);
+  border-radius: 99px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.rank-bar-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 99px;
+}
+.rank-value {
+  font-size: .82rem;
+  font-weight: 700;
+  min-width: 72px;
+  text-align: right;
+  color: var(--text);
+  flex-shrink: 0;
+}
+
+/* Selection badges on ranking rows */
+.rank-badge {
+  font-size: .62rem;
+  font-weight: 700;
+  border-radius: 99px;
+  padding: 1px 6px;
+  flex-shrink: 0;
+}
+.rank-badge-a { background: #3b82f6; color: #fff; }
+.rank-badge-b { background: #f59e0b; color: #fff; }
+
+/* ── Compare pane ── */
+.compare-selectors {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+.compare-selector label {
+  display: block;
+  font-size: .75rem;
+  font-weight: 600;
+  color: var(--text-light);
+  margin-bottom: 5px;
+}
+.compare-vs {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--text-light);
+  padding-top: 18px;
+}
+.compare-output { max-width: 860px; }
+
+.compare-hero {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 14px;
+  margin-bottom: 28px;
+  align-items: start;
+}
+.compare-state-card {
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 20px;
+  border: 2px solid var(--border);
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+.compare-state-card.side-a { border-color: #3b82f6; }
+.compare-state-card.side-b { border-color: #f59e0b; }
+.compare-abbr { font-size: 1.8rem; font-weight: 800; margin-bottom: 4px; }
+.side-a .compare-abbr { color: #3b82f6; }
+.side-b .compare-abbr { color: #f59e0b; }
+.compare-name { font-size: .95rem; font-weight: 700; margin-bottom: 2px; }
+.compare-region { font-size: .78rem; color: var(--text-light); }
+.compare-divider {
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; color: var(--text-light); font-size: .95rem;
+  padding-top: 36px;
+}
+
+.compare-charts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.compare-chart-card {
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 18px;
+  box-shadow: var(--shadow);
+}
+.compare-chart-title {
+  font-size: .75rem;
+  font-weight: 700;
+  color: var(--text-mid);
+  margin-bottom: 14px;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+.compare-bar-group { margin-bottom: 14px; }
+.compare-bar-group:last-child { margin-bottom: 0; }
+.compare-bar-track {
+  height: 20px;
+  background: var(--bg);
+  border-radius: 99px;
+  overflow: hidden;
+}
+.compare-bar-fill {
+  height: 100%;
+  border-radius: 99px;
+  transition: width .5s cubic-bezier(.4,0,.2,1);
+  min-width: 4px;
+}
+.fill-a { background: #3b82f6; }
+.fill-b { background: #f59e0b; }
+
+/* Empty compare placeholder */
+.compare-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 64px 24px;
+  text-align: center;
+  color: var(--text-light);
+  gap: 10px;
+}
+.compare-placeholder-icon {
+  font-size: 3rem;
+  opacity: .25;
+}
+.compare-placeholder-text {
+  font-size: .95rem;
+}
+
+/* ── Responsive ── */
+@media (max-width: 860px) {
+  .data-page-layout {
+    grid-template-columns: 1fr;
+  }
+  .rankings-pane {
+    position: static;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+  .compare-charts { grid-template-columns: 1fr; }
+  .compare-hero { grid-template-columns: 1fr; }
+  .compare-divider { padding-top: 0; }
+}
